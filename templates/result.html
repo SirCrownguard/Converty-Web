@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Converty | Results</title>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <!-- External CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="light-theme">
+  <!-- Header from index.html -->
+  <header>
+    <div class="logo" id="appLogo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round"
+           stroke-linejoin="round">
+        <path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <path d="M2 15h10"></path>
+        <path d="M9 18l3-3-3-3"></path>
+      </svg>
+      Converty
+    </div>
+    <div class="controls">
+      <div class="language-switch" id="languageSwitch">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+        </svg>
+      </div>
+      <div class="theme-switch" id="themeSwitch">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+      </div>
+      <div class="language-menu" id="languageMenu">
+        <button data-lang="tr">Türkçe</button>
+        <button data-lang="en">English</button>
+        <button data-lang="zh">中文</button>
+        <button data-lang="es">Español</button>
+        <button data-lang="pt">Português</button>
+        <button data-lang="hi">हिन्दी</button>
+      </div>
+    </div>
+  </header>
+  
+  <!-- 
+    [If by "footage section" you meant a specific part from index.html (for example, the upload area),
+    please let me know so I can insert it here exactly as-is.]
+  -->
+  
+  <main>
+    <div class="result-container" style="text-align: center; padding: 2rem;">
+      <h1></h1>
+      <p class="message"></p>
+      <p id="downloadInstruction"></p>
+      <button class="btn" id="convertAgainBtn"></button>
+      <!-- Countdown Timer -->
+      <p id="countdown" style="margin-top: 1.5rem; font-weight: bold;"></p>
+    </div>
+  </main>
+
+  <!-- Footer from index.html -->
+  <footer>
+    © 2025 Converty
+  </footer>
+
+  <!-- External JavaScript -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+  <script>
+    // Ensure result page texts are updated based on selected language
+    if (typeof updateResultPageText === "function") {
+      updateResultPageText();
+    }
+
+    // Countdown timer logic with dynamic translation from langData
+    let countdownElement = document.getElementById("countdown");
+    let timeLeft = 10;
+    let countdownInterval = setInterval(() => {
+      if (timeLeft <= 0) {
+        clearInterval(countdownInterval);
+        window.location.href = "/";
+      } else {
+        countdownElement.innerText = langData[currentLang].resultRedirecting.replace("{count}", timeLeft);
+      }
+      timeLeft--;
+    }, 1000);
+
+    // Download link functionality (link element is inserted via language text in downloadInstruction)
+    document.addEventListener("DOMContentLoaded", function () {
+      const downloadLink = document.getElementById("downloadLink");
+      if (downloadLink) {
+        const downloadURL = sessionStorage.getItem("downloadURL") || "#";
+        downloadLink.addEventListener("click", () => {
+          window.location.href = downloadURL;
+        });
+      }
+    });
+
+    // "Convert Again" button functionality
+    document.getElementById("convertAgainBtn").addEventListener("click", () => {
+      window.location.href = "/";
+    });
+  </script>
+</body>
+</html>

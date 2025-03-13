@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Converty | PDF - PPTX Converter</title>
+  <!-- Google Fonts -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
+    rel="stylesheet"
+  >
+  <!-- Reference the CSS in static folder using Flask's url_for -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="light-theme">
+  <header>
+    <div class="logo" id="appLogo">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round"
+           stroke-linejoin="round">
+        <path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+        <path d="M2 15h10"></path>
+        <path d="M9 18l3-3-3-3"></path>
+      </svg>
+      Converty
+    </div>
+    <div class="controls">
+      <div class="language-switch" id="languageSwitch">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="2" y1="12" x2="22" y2="12"></line>
+        </svg>
+      </div>
+      <div class="theme-switch" id="themeSwitch">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+      </div>
+      <div class="language-menu" id="languageMenu">
+        <button data-lang="tr">Türkçe</button>
+        <button data-lang="en">English</button>
+        <button data-lang="zh">中文</button>
+        <button data-lang="es">Español</button>
+        <button data-lang="pt">Português</button>
+        <button data-lang="hi">हिन्दी</button>
+      </div>
+    </div>
+  </header>
+  <main>
+    <div class="conversion-container">
+      <div class="tabs">
+        <div class="tab active" id="tabPdfToPptx" data-type="pdf_to_pptx">
+          PDF › PPTX
+        </div>
+        <div class="tab" id="tabPptxToPdf" data-type="pptx_to_pdf">
+          PPTX › PDF
+        </div>
+      </div>
+      <!-- Drag & Drop area -->
+      <div class="upload-area" id="uploadArea">
+        <div class="upload-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
+               fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="17 8 12 3 7 8"></polyline>
+            <line x1="12" y1="3" x2="12" y2="15"></line>
+          </svg>
+        </div>
+        <h3 class="upload-text" id="uploadText">Drag or select your PDF file</h3>
+        <p class="upload-subtext" id="uploadSubtext">Maximum file size: 100MB</p>
+        <input type="file" id="fileInput" class="file-input" multiple>
+      </div>
+      <div id="fileList"></div>
+      <!-- Convert/Download button -->
+      <button id="startConvertBtn" class="btn" disabled style="display:block; margin: 0 auto;">
+        Convert
+      </button>
+    </div>
+  </main>
+  <footer>
+    © 2025 Converty
+  </footer>
+  <!-- Reference the JS in static folder using Flask's url_for -->
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
