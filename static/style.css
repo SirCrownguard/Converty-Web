@@ -191,7 +191,7 @@
     height: 10px;
     width: 0%;
     background-color: var(--upload-color);
-    transition: width 0.2s ease;
+    transition: width 0.4s ease;
   }
   .btn {
     padding: 0.75rem 1.5rem;
@@ -210,13 +210,33 @@
     pointer-events: none;
   }
   footer {
-    text-align: center;
-    padding: 1.5rem;
+    display: flex;
+    justify-content: center; /* Yatayda ortalama */
+    align-items: center; /* Dikeyde ortalama */
+    gap: 10px; /* İkon ile yazı arasındaki boşluk */
+    height: 60px; /* Footer yüksekliği */
     background-color: var(--card-light);
     color: var(--text-light);
-    opacity: 0.8;
-    font-size: 0.9rem;
-  }
+    position: fixed; /* Sayfanın altında sabit */
+    width: 100%;
+    bottom: 0;
+}
+
+.github-icon {
+    width: 80px; /* İkon boyutu */
+    height: 80px;
+    transition: transform 0.2s ease-in-out;
+}
+
+.github-link:hover .github-icon {
+    transform: scale(1.1); /* Hover efekti */
+}
+
+footer p {
+    margin: 0; /* Varsayılan boşluğu kaldır */
+    font-weight: bold;
+}
+
   @media (max-width: 768px) {
     header {
       padding: 1rem;
