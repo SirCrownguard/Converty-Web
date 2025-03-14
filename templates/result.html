@@ -6,11 +6,12 @@
   <title>Converty | Results</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- External CSS -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body class="light-theme">
-  <!-- Header from index.html -->
   <header>
     <div class="logo" id="appLogo">
       <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
@@ -25,17 +26,10 @@
     </div>
     <div class="controls">
       <div class="language-switch" id="languageSwitch">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="2" y1="12" x2="22" y2="12"></line>
-        </svg>
+        <span class="material-icons" id="languageIcon">language</span>
       </div>
       <div class="theme-switch" id="themeSwitch">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-        </svg>
+        <span class="material-icons" id="themeIcon">dark_mode</span>
       </div>
       <div class="language-menu" id="languageMenu">
         <button data-lang="tr">Türkçe</button>
@@ -48,11 +42,6 @@
     </div>
   </header>
   
-  <!-- 
-    [If by "footage section" you meant a specific part from index.html (for example, the upload area),
-    please let me know so I can insert it here exactly as-is.]
-  -->
-  
   <main>
     <div class="result-container" style="text-align: center; padding: 2rem;">
       <h1></h1>
@@ -64,20 +53,15 @@
     </div>
   </main>
 
-  <!-- Footer from index.html -->
   <footer>
     © 2025 Converty
   </footer>
 
-  <!-- External JavaScript -->
   <script src="{{ url_for('static', filename='script.js') }}"></script>
   <script>
-    // Ensure result page texts are updated based on selected language
     if (typeof updateResultPageText === "function") {
       updateResultPageText();
     }
-
-    // Countdown timer logic with dynamic translation from langData
     let countdownElement = document.getElementById("countdown");
     let timeLeft = 10;
     let countdownInterval = setInterval(() => {
@@ -89,8 +73,6 @@
       }
       timeLeft--;
     }, 1000);
-
-    // Download link functionality (link element is inserted via language text in downloadInstruction)
     document.addEventListener("DOMContentLoaded", function () {
       const downloadLink = document.getElementById("downloadLink");
       if (downloadLink) {
@@ -100,8 +82,6 @@
         });
       }
     });
-
-    // "Convert Again" button functionality
     document.getElementById("convertAgainBtn").addEventListener("click", () => {
       window.location.href = "/";
     });

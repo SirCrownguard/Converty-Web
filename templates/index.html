@@ -9,6 +9,8 @@
     href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
     rel="stylesheet"
   >
+  <!-- Material Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <!-- Reference the CSS in static folder using Flask's url_for -->
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -27,17 +29,10 @@
     </div>
     <div class="controls">
       <div class="language-switch" id="languageSwitch">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="2" y1="12" x2="22" y2="12"></line>
-        </svg>
+        <span class="material-icons" id="languageIcon">language</span>
       </div>
       <div class="theme-switch" id="themeSwitch">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
-        </svg>
+        <span class="material-icons" id="themeIcon">dark_mode</span>
       </div>
       <div class="language-menu" id="languageMenu">
         <button data-lang="tr">Türkçe</button>
@@ -53,42 +48,37 @@
     <div class="conversion-container">
       <div class="tabs">
         <div class="tab active" id="tabPdfToPptx" data-type="pdf_to_pptx">
-          PDF › PPTX
+          {{ langData[currentLang].tabPdfToPptx if langData and currentLang else "PDF › PPTX" }}
         </div>
         <div class="tab" id="tabPptxToPdf" data-type="pptx_to_pdf">
-          PPTX › PDF
+          {{ langData[currentLang].tabPptxToPdf if langData and currentLang else "PPTX › PDF" }}
         </div>
       </div>
       <!-- Drag & Drop area -->
       <div class="upload-area" id="uploadArea">
         <div class="upload-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48"
-               fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-            <polyline points="17 8 12 3 7 8"></polyline>
-            <line x1="12" y1="3" x2="12" y2="15"></line>
-          </svg>
+          <span class="material-icons">upload</span>
         </div>
-        <h3 class="upload-text" id="uploadText">Drag or select your PDF file</h3>
-        <p class="upload-subtext" id="uploadSubtext">Maximum file size: 100MB</p>
+        <h3 class="upload-text" id="uploadText">{{ langData[currentLang].uploadText if langData and currentLang else "Drag or select your PDF file" }}</h3>
+        <p class="upload-subtext" id="uploadSubtext">{{ langData[currentLang].uploadSubtext if langData and currentLang else "Maximum file size: 100MB" }}</p>
         <input type="file" id="fileInput" class="file-input" multiple>
       </div>
       <div id="fileList"></div>
       <!-- Convert/Download button -->
       <button id="startConvertBtn" class="btn" disabled style="display:block; margin: 0 auto;">
-        Convert
+        <!-- Buton başlangıç durumu, JS tarafından güncellenecek -->
       </button>
     </div>
   </main>
   <footer>
+    <div class="footer-content">
     <a href="https://github.com/SirCrownguard/Converty-Web" target="_blank" class="github-link">
         <img src="static/GitHub_Logo.svg" alt="Source Code" class="github-icon">
     </a>
     <p>© 2025 Converty</p>
-</footer>
+  </div>
+  </footer>
 
-<link rel="stylesheet" href="static/style.css">
   <!-- Reference the JS in static folder using Flask's url_for -->
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>

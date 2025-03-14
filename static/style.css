@@ -1,251 +1,260 @@
 :root {
-    --primary: #4361ee;
-    --primary-hover: #3a56d4;
-    --upload-color: #007bff;
-    --convert-color: #fd7e14;
-    --border: #dee2e6;
-    --bg-light: #f8f9fa;
-    --text-light: #212529;
-    --card-light: #ffffff;
-  }
-  body.dark-theme {
-    --primary: #3f37c9;
-    --primary-hover: #2a27af;
-    --upload-color: #0d6efd;
-    --convert-color: #ff922b;
-    --border: #495057;
-    --bg-light: #212529;
-    --text-light: #f8f9fa;
-    --card-light: #2b3035;
-  }
-  body {
-    background-color: var(--bg-light);
-    color: var(--text-light);
-    font-family: 'Open Sans', sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-  }
-  header, footer {
-    background-color: var(--card-light);
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  header .logo {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--primary);
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  .controls {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-    position: relative;
-  }
-  .theme-switch, .language-switch {
-    cursor: pointer;
-    padding: 0.5rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .theme-switch:hover, .language-switch:hover {
-    background-color: var(--border);
-  }
-  .controls svg {
-    width: 24px;
-    height: 24px;
-    stroke: var(--text-light);
-  }
-  .language-menu {
-    display: none;
-    position: absolute;
-    top: 3rem;
-    right: 0;
-    background-color: var(--card-light);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    z-index: 100;
-  }
-  .language-menu.active {
-    display: block;
-  }
-  .language-menu button {
-    width: 100%;
-    padding: 0.5rem 1rem;
-    background: none;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    color: var(--text-light);
-  }
-  .language-menu button:hover {
-    background-color: var(--border);
-  }
-  main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
+  --primary: #4361ee;
+  --primary-hover: #3a56d4;
+  --upload-color: #007bff;
+  --convert-color: #fd7e14;
+  --border: #dee2e6;
+  --bg-light: #f8f9fa;
+  --text-light: #212529;
+  --card-light: #ffffff;
+}
+body.dark-theme {
+  --primary: #3f37c9;
+  --primary-hover: #2a27af;
+  --upload-color: #0d6efd;
+  --convert-color: #ff922b;
+  --border: #495057;
+  --bg-light: #212529;
+  --text-light: #f8f9fa;
+  --card-light: #2b3035;
+}
+body {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+header, footer {
+  background-color: var(--card-light);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+}
+.theme-switch, .language-switch {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+.theme-switch:hover, .language-switch:hover {
+  background-color: var(--border);
+}
+.controls .material-icons {
+  font-size: 24px;
+  color: var(--text-light);
+}
+.language-menu {
+  opacity: 0;
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  position: absolute;
+  top: 3rem;
+  right: 0;
+  background-color: var(--card-light);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  z-index: 100;
+  pointer-events: none;
+}
+.language-menu.active {
+  opacity: 1;
+  transform: scaleY(1);
+  pointer-events: auto;
+}
+.language-menu button {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-light);
+}
+.language-menu button:hover {
+  background-color: var(--border);
+}
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+.conversion-container {
+  width: 100%;
+  max-width: 800px;
+  background-color: var(--card-light);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+}
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 0.75rem;
+  cursor: pointer;
+  opacity: 0.7;
+  font-weight: 700;
+}
+.tab.active {
+  opacity: 1;
+  color: var(--primary);
+  border-bottom: 3px solid var(--primary);
+}
+.upload-area {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.3s;
+}
+.upload-area:hover {
+  border-color: var(--primary);
+}
+.upload-icon {
+  font-size: 3rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+.upload-text {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+.upload-subtext {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+.file-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+.file-name {
+  font-weight: 700;
+}
+.file-size {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-left: 0.5rem;
+}
+.progress-bar-container {
+  width: 100%;
+  background-color: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+.progress-bar {
+  height: 10px;
+  width: 0%;
+  background-color: var(--upload-color);
+  transition: width 0.4s ease;
+}
+.btn {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-weight: 700;
+  transition: background-color 0.5s, transform 0.15s;
+}
+.btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  height: 30px;
+  background-color: var(--card-light);
+  color: var(--text-light);
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+
+.footer-content {
+  display: flex;
+  align-items: center; /* Dikeyde ortala */
+  gap: 10px; /* İki öğe arasındaki boşluk */
+}
+.github-icon {
+  width: 80px;
+  height: 40px;
+  border-radius: 20px;
+  transition: background-color 0.6s ease, transform 0.3s ease;
+}
+.github-link:hover .github-icon {
+  border-radius: 20px;
+  background-color: var(--border);
+}
+footer p {
+  margin: 0;
+  font-weight: bold;
+}
+@media (max-width: 768px) {
+  header {
+    padding: 1rem;
   }
   .conversion-container {
-    width: 100%;
-    max-width: 800px;
-    background-color: var(--card-light);
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    padding: 2rem;
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-  .tabs {
-    display: flex;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 1rem;
+    padding: 1.5rem;
   }
   .tab {
-    flex: 1;
-    text-align: center;
     padding: 0.75rem;
-    cursor: pointer;
-    opacity: 0.7;
-    font-weight: 700;
   }
-  .tab.active {
-    opacity: 1;
-    color: var(--primary);
-    border-bottom: 3px solid var(--primary);
-  }
-  .upload-area {
-    border: 2px dashed var(--border);
-    border-radius: 8px;
-    padding: 3rem 2rem;
-    text-align: center;
-    margin-bottom: 1.5rem;
-    cursor: pointer;
-    position: relative;
-    transition: border-color 0.3s;
-  }
-  .upload-area:hover {
-    border-color: var(--primary);
-  }
-  .upload-icon {
-    font-size: 3rem;
-    color: var(--primary);
-    margin-bottom: 1rem;
-  }
-  .upload-text {
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-  }
-  .upload-subtext {
-    opacity: 0.7;
-    font-size: 0.9rem;
-  }
-  .file-input {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    cursor: pointer;
-  }
-  .file-item {
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    padding: 0.75rem;
-    margin-bottom: 0.75rem;
-    text-align: left;
-  }
-  .file-name {
-    font-weight: 700;
-  }
-  .file-size {
-    font-size: 0.9rem;
-    color: var(--text-light);
-    margin-left: 0.5rem;
-  }
-  .progress-bar-container {
-    width: 100%;
-    background-color: var(--border);
-    border-radius: 4px;
-    overflow: hidden;
-    margin-top: 0.5rem;
-  }
-  .progress-bar {
-    height: 10px;
-    width: 0%;
-    background-color: var(--upload-color);
-    transition: width 0.4s ease;
-  }
-  .btn {
-    padding: 0.75rem 1.5rem;
-    background-color: var(--primary);
-    color: white;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    margin-top: 1rem;
-    font-weight: 700;
-    transition: background-color 0.5s;
-  }
-  .btn:disabled {
-    background-color: #cccccc;
-    cursor: not-allowed;
-    pointer-events: none;
-  }
-  footer {
-    display: flex;
-    justify-content: center; /* Yatayda ortalama */
-    align-items: center; /* Dikeyde ortalama */
-    gap: 10px; /* İkon ile yazı arasındaki boşluk */
-    height: 60px; /* Footer yüksekliği */
-    background-color: var(--card-light);
-    color: var(--text-light);
-    position: fixed; /* Sayfanın altında sabit */
-    width: 100%;
-    bottom: 0;
 }
-
-.github-icon {
-    width: 80px; /* İkon boyutu */
-    height: 80px;
-    transition: transform 0.2s ease-in-out;
-}
-
-.github-link:hover .github-icon {
-    transform: scale(1.1); /* Hover efekti */
-}
-
-footer p {
-    margin: 0; /* Varsayılan boşluğu kaldır */
-    font-weight: bold;
-}
-
-  @media (max-width: 768px) {
-    header {
-      padding: 1rem;
-    }
-    .conversion-container {
-      padding: 1.5rem;
-    }
-    .tab {
-      padding: 0.75rem;
-    }
-  }
-  
