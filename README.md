@@ -12,6 +12,8 @@ the PDF to PPTX and PPTX to PDF tool.
 
 ## Requirements
 
+* Python
+* LibreOffice (For PPTX to PDF)
 * `Flask`
 * `pdf2image`
 * `python-pptx`
