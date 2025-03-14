@@ -28,6 +28,7 @@ for take a look how it's looks like without backend.
 
 ### 1. Install Python
 Make sure you have Python installed. If not, download and install it from [python.org](https://www.python.org/downloads/).
+
 Add PATH for Windows.
 
 ### 2. Install LibreOffice  
