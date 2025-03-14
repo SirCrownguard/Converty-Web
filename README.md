@@ -10,8 +10,6 @@ Converty Web is a web version of
 the PDF to PPTX and PPTX to PDF tool.
 </p>
 
-<br>
-
 <p align="center"> 
 <a href="https://sircrownguard.github.io">Web version</a>   
 for take a look how it's looks like without backend.
