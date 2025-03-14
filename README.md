@@ -42,6 +42,7 @@ Required for PPTX to PDF conversion:
 - **Windows**:
   
   [Download from libreoffice.org](https://www.libreoffice.org)
+  
   Add LibreOffice to PATH
 
 ### 3. Install Dependencies
