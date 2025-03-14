@@ -19,7 +19,10 @@ the PDF to PPTX and PPTX to PDF tool.
 
 ## Installation
 
-### 1. Install LibreOffice  
+### 1. Install Python
+Make sure you have Python installed. If not, download and install it from [python.org](https://www.python.org/downloads/). 
+
+### 2. Install LibreOffice  
 Required for PPTX to PDF conversion:  
 - **Linux**:  
   ```bash
@@ -30,9 +33,12 @@ Required for PPTX to PDF conversion:
 - **Windows**:
   
   [Download from libreoffice.org](https://www.libreoffice.org)
-
   Add LibreOffice to PATH
 
+### 3. Install Dependencies
+  ```bash
+  pip install -r requirements.txt
+  ```
 ## Usage
     python app.py
 
