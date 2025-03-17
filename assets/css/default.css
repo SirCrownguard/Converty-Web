@@ -1,0 +1,379 @@
+:root {
+  --primary: #4361ee;
+  --primary-hover: #3a56d4;
+  --upload-color: #007bff;
+  --convert-color: #fd7e14;
+  --border: #dee2e6;
+  --bg-light: #f8f9fa;
+  --text-light: #212529;
+  --card-light: #ffffff;
+}
+
+body.dark-theme {
+  --primary: #3f37c9;
+  --primary-hover: #2a27af;
+  --upload-color: #0d6efd;
+  --convert-color: #ff922b;
+  --border: #495057;
+  --bg-light: #212529;
+  --text-light: #f8f9fa;
+  --card-light: #2b3035;
+}
+
+html, body {
+  height: 100%;
+  overflow-x: hidden; /* Kaydırma çubuğu için sabit alan ayırır */
+  position: relative;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  position: relative;
+}
+
+header, footer {
+  background-color: var(--card-light);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  max-width: 100vw;
+}
+
+header .logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.controls {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.theme-switch, .language-switch {
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.theme-switch:hover, .language-switch:hover {
+  background-color: var(--border);
+}
+
+.controls .material-icons {
+  font-size: 24px;
+  color: var(--text-light);
+}
+
+.language-menu {
+  opacity: 0;
+  transform: translateY(-10px);
+  transform: scaleY(0);
+  transform-origin: top right;
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+  position: fixed;
+  top: 65px;
+  width: auto;
+  max-width: 85px;
+  overflow: hidden;
+  background-color: var(--card-light);
+  border: 2px solid var(--border);
+  border-radius: 10px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.language-menu.active {
+  opacity: 1;
+  transform: scaleY(1);
+  pointer-events: auto;
+}
+
+.language-menu button {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  color: var(--text-light);
+}
+
+.language-menu button:hover {
+  background-color: var(--border);
+}
+
+main {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: center;
+}
+
+.conversion-container {
+  width: calc(100% - 32px);
+  max-width: 800px;
+  background-color: var(--card-light);
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  padding: 2rem;
+  margin-bottom: auto;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  flex-direction: column;
+  display: flex;
+}
+
+/* Sekme yapısı */
+.tabs {
+  position: relative;
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 1rem;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Her sekme */
+.tab {
+  flex: 1;
+  text-align: center;
+  padding: 0.75rem;
+  cursor: pointer;
+  opacity: 0.7;
+  font-weight: 700;
+  transition: color 0.3s ease;
+  color: #888;
+  display: block;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+
+.tab.active {
+  opacity: 1;
+  color: var(--primary);
+}
+
+
+/* Alt çizgi (indicator) */
+.tab-indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background-color: var(--primary);
+  width: 0;
+  transition: left 0.25s ease, width 0.25s ease;
+}
+
+/* Eğer HTML'de tab-text varsa, normal blok gibi göster; old-color'u görünür yap */
+.tab-text {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* old-color asıl metin: göster */
+.old-color {
+  display: inline-block;
+}
+
+/* new-color tamamen gizli */
+.new-color {
+  display: none;
+}
+
+/* DOSYA YÜKLEME ALANI */
+.upload-area {
+  border: 2px dashed var(--border);
+  border-radius: 8px;
+  padding: 3rem 2rem;
+  text-align: center;
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.4s;
+}
+
+.upload-area:hover {
+  border-color: var(--primary);
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+.upload-icon {
+  font-size: 3rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.upload-text {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.upload-subtext {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.file-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.file-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 0.75rem;
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+
+.file-name {
+  font-weight: 700;
+}
+
+.file-size {
+  font-size: 0.9rem;
+  color: var(--text-light);
+  margin-left: 0.5rem;
+}
+
+.progress-bar-container {
+  width: 100%;
+  background-color: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 0.5rem;
+}
+
+.progress-bar {
+  height: 10px;
+  width: 0%;
+  background-color: var(--upload-color);
+  transition: width 0.4s ease;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 1rem;
+  font-weight: 700;
+  transition: background-color 0.5s, transform 0.15s;
+}
+
+.btn:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background-color: var(--card-light);
+  color: var(--text-light);
+  width: 100%;
+  margin-top: auto;
+  bottom: 0;
+  padding: 0.5rem 1rem;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
+}
+
+.footer-content {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.footer-content a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.github-icon {
+  width: 80px;
+  height: 40px;
+  border-radius: 20px;
+  transition: background-color 0.6s ease, transform 0.3s ease;
+}
+
+.github-link:hover .github-icon {
+  border-radius: 20px;
+  background-color: var(--border);
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+footer p {
+  margin: 0;
+  font-weight: bold;
+}
