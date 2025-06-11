@@ -1,0 +1,28 @@
+[req]
+default_bits        = 4096
+distinguished_name  = req_distinguished_name
+req_extensions      = v3_req  # Bu bölümü x509_extensions için de kullanabiliriz
+x509_extensions     = v3_req  # Kendi kendine imzalı sertifika için
+prompt              = no
+
+[req_distinguished_name]
+C                   = TR
+ST                  = Istanbul
+L                   = Istanbul
+O                   = My Company
+OU                  = My Unit
+CN                  = 192.168.3.90  # Ana erişim adresiniz CN olabilir
+
+[v3_req] # Eskiden [req_ext] idi, daha standart bir isim kullanalım
+keyUsage            = critical, digitalSignature, keyEncipherment # keyAgreement yerine keyEncipherment daha yaygın sunucu sertifikaları için
+extendedKeyUsage    = serverAuth
+subjectAltName      = @alt_names
+
+[alt_names]
+DNS.1 = localhost
+DNS.2 = my-laptop.local
+DNS.3 = app.internal
+IP.1  = 127.0.0.1
+IP.2  = 192.168.3.90
+IP.3  = 192.168.1.100
+IP.4  = 10.0.0.1

@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+instance/
+uploads/
+converted/
+.DS_Store
+*.mo
+messages.pot
+.po
