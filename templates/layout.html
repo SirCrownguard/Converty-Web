@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="{{ g.locale }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#3A6A2A">
+    <title>{{ _('Converty') }}</title> <!-- AD DEĞİŞTİ -->
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Outlined" rel="stylesheet">
+    <link rel="manifest" href="{{ url_for('web_manifest') }}">
+    
+
+    <script type="importmap">
+    {
+      "imports": {
+        "@material/web/": "https://esm.run/@material/web/"
+      }
+    }
+    </script>
+    
+
+    <script type="module">
+      import '@material/web/all.js';
+      import {styles as typescaleStyles} from '@material/web/typography/md-typescale-styles.js';
+      document.adoptedStyleSheets.push(typescaleStyles.styleSheet);
+    </script>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="top-app-bar">
+        <h1 class="form-title md-typescale-title-large">{{ _('Converty') }}</h1>
+        <div class="settings">
+            <!-- TEMA SEÇİMİ md-outlined-select İLE -->
+            <md-outlined-select id="main-theme-select" label="{{ _('Theme') }}" menu-positioning="popover">
+                <md-select-option value="theme-green" selected> <!-- Varsayılan Yeşil Tema -->
+                    <div slot="headline">{{ _('Green Theme') }}</div>
+                </md-select-option>
+                <md-select-option value="theme-ocean">
+                    <div slot="headline">{{ _('Ocean Theme') }}</div>
+                </md-select-option>
+                <!-- Başka ana temalarınız varsa buraya ekleyin -->
+                <!-- Örnek: Mor Tema
+                <md-select-option value="theme-purple">
+                    <div slot="headline">{{ _('Purple Theme') }}</div>
+                </md-select-option>
+                -->
+            </md-outlined-select>
+
+            <md-outlined-select id="language-select" label="{{ _('Language') }}" menu-positioning="popover">
+                {% for lang_code, lang_name in config['LANGUAGES'].items() %}
+                <md-select-option value="{{ lang_code }}" {% if g.locale == lang_code %}selected{% endif %}>
+                    <div slot="headline">{{ lang_name }}</div>
+                </md-select-option>
+                {% endfor %}
+            </md-outlined-select>
+
+            <md-icon-button id="theme-toggle" toggle aria-label="{{ _('Toggle Theme') }}">
+                <md-icon>light_mode</md-icon>
+                <md-icon slot="selectedIcon">dark_mode</md-icon>
+            </md-icon-button>
+
+                        <!-- PWA Yükleme Butonu (Başlangıçta gizli) -->
+            <md-filled-button id="install-pwa-button" style="display: none;">
+                <md-icon slot="icon">download</md-icon>
+                <span class="pwa-button-text">{{ _('Install App') }}</span> <!-- DEĞİŞİKLİK BURADA -->
+            </md-filled-button>
+        </div>
+    </header>
+
+    <main class="main-content-area"> <!-- ANA İÇERİK ALANI İÇİN SINIF -->
+        {% block content %}{% endblock %}
+    </main>
+
+    <md-dialog id="error-dialog">
+        <div slot="headline">{{ _('Error') }}</div>
+        <form slot="content" id="error-dialog-form" method="dialog">
+            <p id="error-dialog-content"></p> <!-- Stil CSS'e taşındı -->
+        </form>
+        <div slot="actions">
+            <md-text-button type="submit" form="error-dialog-form">{{ _('OK') }}</md-text-button>
+        </div>
+    </md-dialog>
+
+    <!-- YENİ: Flask/Jinja2 ile çevirileri ve yapılandırmayı JS'e aktarma -->
+    <script>
+    window.appTranslations = {
+        dosyaSecilmedi: "{{ _('No file selected') }}",
+        yukleniyor: "{{ _('Loading...') }}",
+        isleniyor: "{{ _('Processing...') }}",
+        hataOlustu: "{{ _('An error occurred.') }}",
+        dosyaCokBuyukFormat: "{{ _('File is too large. Maximum allowed size: {size}MB.') }}",
+        lutfenSecimYapin: "{{ _('Please select a file and a conversion type.') }}",
+        maxFileSizeMB: {{ ((config.MAX_CONTENT_LENGTH / (1024*1024)) | round(1)) if config.MAX_CONTENT_LENGTH is defined and config.MAX_CONTENT_LENGTH is not none else 50.0 }}
+    };
+    </script>
+    
+    <!-- DEĞİŞTİ: Eski script etiketi yerine yeni modüler main.js -->
+    <script type="module" src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

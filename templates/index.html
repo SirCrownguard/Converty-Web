@@ -1,85 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Converty | PDF - PPTX Converter</title>
-  <!-- Google Fonts -->
-  <link
-    href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap"
-    rel="stylesheet"
-  >
-  <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <!-- Reference the CSS in static folder using Flask's url_for -->
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body class="light-theme">
-  <header>
-    <div class="logo" id="appLogo">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none"
-           stroke="currentColor" stroke-width="2" stroke-linecap="round"
-           stroke-linejoin="round">
-        <path d="M4 22h14a2 2 0 0 0 2-2V7.5L14.5 2H6a2 2 0 0 0-2 2v4"></path>
-        <polyline points="14 2 14 8 20 8"></polyline>
-        <path d="M2 15h10"></path>
-        <path d="M9 18l3-3-3-3"></path>
-      </svg>
-      Converty
-    </div>
-    <div class="controls">
-      <div class="language-switch" id="languageSwitch">
-        <span class="material-icons" id="languageIcon">language</span>
-      </div>
-      <div class="theme-switch" id="themeSwitch">
-        <span class="material-icons" id="themeIcon">dark_mode</span>
-      </div>
-      <div class="language-menu" id="languageMenu">
-        <button data-lang="tr">Türkçe</button>
-        <button data-lang="en">English</button>
-        <button data-lang="zh">中文</button>
-        <button data-lang="es">Español</button>
-        <button data-lang="pt">Português</button>
-        <button data-lang="hi">हिन्दी</button>
-      </div>
-    </div>
-  </header>
-  <main>
-    <div class="conversion-container">
-      <div class="tabs">
-        <div class="tab active" id="tabPdfToPptx" data-type="pdf_to_pptx">
-          {{ langData[currentLang].tabPdfToPptx if langData and currentLang else "PDF › PPTX" }}
-        </div>
-        <div class="tab" id="tabPptxToPdf" data-type="pptx_to_pdf">
-          {{ langData[currentLang].tabPptxToPdf if langData and currentLang else "PPTX › PDF" }}
-        </div>
-      </div>
-      <!-- Drag & Drop area -->
-      <div class="upload-area" id="uploadArea">
-        <div class="upload-icon">
-          <span class="material-icons">upload</span>
-        </div>
-        <h3 class="upload-text" id="uploadText">{{ langData[currentLang].uploadText if langData and currentLang else "Drag or select your PDF file" }}</h3>
-        <p class="upload-subtext" id="uploadSubtext">{{ langData[currentLang].uploadSubtext if langData and currentLang else "Maximum file size: 100MB" }}</p>
-        <input type="file" id="fileInput" class="file-input" multiple>
-      </div>
-      <div id="fileList"></div>
-      <!-- Convert/Download button -->
-      <button id="startConvertBtn" class="btn" disabled style="display:block; margin: 0 auto;">
-        <!-- Buton başlangıç durumu, JS tarafından güncellenecek -->
-      </button>
-    </div>
-  </main>
-  <footer>
-    <div class="footer-content">
-    <a href="https://github.com/SirCrownguard/Converty-Web" target="_blank" class="github-link">
-        <img src="static/GitHub_Logo.svg" alt="Source Code" class="github-icon">
-    </a>
-    <p>© 2025 Converty</p>
-  </div>
-  </footer>
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-card">
+    <form id="upload-form" method="post" enctype="multipart/form-data">
+        <h2 class="form-title md-typescale-title-large">{{ _('Start a New Conversion') }}</h2>
 
-  <!-- Reference the JS in static folder using Flask's url_for -->
-  <script src="{{ url_for('static', filename='script.js') }}"></script>
-</body>
-</html>
+        <md-outlined-select id="conversion-type" name="conversion_type" label="{{ _('Conversion Type') }}" required>
+            {% for conv_key, conv_data in converters.items() %}
+            <md-select-option value="{{ conv_key }}"
+                              data-input-accept="{{ conv_data.input_accept }}"
+                              data-output-extension="{{ conv_data.output_extension }}">
+                <div slot="headline">{{ _(conv_data.display_name_key) }}</div> <!-- DİL DOSYASINDAN GELMELİ -->
+            </md-select-option>
+            {% endfor %}
+        </md-outlined-select>
+
+        <div class="file-input-area">
+            <label for="file-input" class="file-input-label-wrapper"> <!-- Butonu sarmalayan label -->
+                <md-filled-button type="button" id="select-file-button" has-icon fullwidth>
+                    <md-icon slot="icon">upload_file</md-icon>
+                    {{ _('Select File') }}
+                </md-filled-button>
+            </label>
+            <input type="file" id="file-input" name="file" style="display: none;" required>
+            <div id="file-name-display" class="md-typescale-body-small">
+                <!-- DEĞİŞİKLİK BURADA: ID EKLENDİ -->
+                <span id="file-name-text">{{ _('No file selected') }}</span> 
+                <span class="file-size-limit">{{ _('Max file size: %(size)sMB', size=(config['MAX_CONTENT_LENGTH'] / (1024*1024)) | round(1) | default(50.0) ) }}</span>
+            </div>
+        </div>
+
+        <div id="progress-container" style="display: none;">
+            <md-linear-progress id="upload-progress" value="0" buffer="1" four-color indeterminate style="width: 100%;"></md-linear-progress>
+            <p id="progress-text" class="md-typescale-label-medium">{{ _('Uploading...') }} 0%</p>
+        </div>
+
+        <md-filled-button type="submit" id="convert-button" disabled fullwidth has-icon>
+            {{ _('Convert') }}
+            <md-icon slot="icon">sync</md-icon>
+        </md-filled-button>
+    </form>
+</div>
+
+<div id="result-container" class="content-card" style="display:none;">
+    <h3 class="md-typescale-title-medium">{{ _('Conversion Result') }}</h3>
+    <a id="download-link" href="#" download>
+        <md-filled-tonal-button fullwidth has-icon>
+            <md-icon slot="icon">download</md-icon>
+            {{ _('Download Converted File') }}
+        </md-filled-tonal-button>
+    </a>
+</div>
+{% endblock %}
