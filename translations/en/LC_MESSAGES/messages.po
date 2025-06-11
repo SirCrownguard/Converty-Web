@@ -1,0 +1,125 @@
+# English translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Made-Date: 2025-05-19 02:54+0300\n"
+"PO-Revision-Date: 2025-05-19 02:54+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: app.py:121
+msgid "Invalid language code."
+msgstr "Invalid language code."
+
+#: app.py:126
+msgid "No file part"
+msgstr "No file part"
+
+#: app.py:132
+msgid "Invalid conversion type"
+msgstr "Invalid conversion type"
+
+#: app.py:135
+msgid "No selected file"
+msgstr "No selected file"
+
+#: app.py:164
+msgid "This conversion type is not yet implemented."
+msgstr "This conversion type is not yet implemented."
+
+#: app.py:192
+msgid "An unexpected error occurred during conversion."
+msgstr "An unexpected error occurred during conversion."
+
+#: app.py:194
+msgid "File type not allowed for selected conversion."
+msgstr "File type not allowed for selected conversion."
+
+#: app.py:208
+msgid "Invalid filename."
+msgstr "Invalid filename."
+
+#: app.py:213
+msgid "File not found."
+msgstr "File not found."
+
+#: templates/index.html:5
+msgid "Conversion Type"
+msgstr "Conversion Type"
+
+#: templates/index.html:19
+msgid "Select File"
+msgstr "Select File"
+
+#: templates/index.html:23
+msgid "No file selected"
+msgstr "No file selected"
+
+#: templates/index.html:24
+#, python-format
+msgid "Max file size: %(size)sMB"
+msgstr "Max file size: %(size)sMB"
+
+#: templates/index.html:29
+msgid "Uploading..."
+msgstr "Uploading..."
+
+#: templates/index.html:35
+msgid "Convert"
+msgstr "Convert"
+
+#: templates/index.html:40
+msgid "Conversion Result"
+msgstr "Conversion Result"
+
+#: templates/index.html:44
+msgid "Download Converted File"
+msgstr "Download Converted File"
+
+#: templates/layout.html:6 templates/layout.html:79
+msgid "File Converter"
+msgstr "File Converter"
+
+#: templates/layout.html:81
+msgid "Language"
+msgstr "Language"
+
+#: templates/layout.html:88
+msgid "Toggle Theme"
+msgstr "Toggle Theme"
+
+#: templates/layout.html:99
+msgid "Error"
+msgstr "Error"
+
+#: templates/layout.html:102
+msgid "OK"
+msgstr "OK"
+
+msgid "Converty - File Converter"
+msgstr "Converty - File Converter"
+
+#: app.py:LINE_NUMBER_OF_SHORT_NAME_IN_MANIFEST_ROUTE
+msgid "Converty"
+msgstr "Converty"
+
+#: app.py:LINE_NUMBER_OF_DESCRIPTION_IN_MANIFEST_ROUTE
+msgid "Easily convert your files with Converty."
+msgstr "Easily convert your files with Converty."
+
+msgid "Start a New Conversion"
+msgstr "Convert"
+
+msgid "converter_pdf_to_pptx"
+msgstr "Convert PDF to PowerPoint

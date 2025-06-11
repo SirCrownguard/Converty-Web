@@ -1,0 +1,125 @@
+# Turkish translations for PROJECT.
+# Copyright (C) 2025 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2025.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Made-Date: 2025-05-19 02:54+0300\n"
+"PO-Revision-Date: 2025-05-19 02:55+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: tr\n"
+"Language-Team: tr <LL@li.org>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.17.0\n"
+
+#: app.py:121
+msgid "Invalid language code."
+msgstr "Geçersiz dil kodu."
+
+#: app.py:126
+msgid "No file part"
+msgstr "Dosya bölümü yok"
+
+#: app.py:132
+msgid "Invalid conversion type"
+msgstr "Geçersiz dönüştürme türü"
+
+#: app.py:135
+msgid "No selected file"
+msgstr "Seçili dosya yok"
+
+#: app.py:164
+msgid "This conversion type is not yet implemented."
+msgstr "Bu dönüştürme türü henüz uygulanmadı."
+
+#: app.py:192
+msgid "An unexpected error occurred during conversion."
+msgstr "Dönüştürme sırasında beklenmeyen bir hata oluştu."
+
+#: app.py:194
+msgid "File type not allowed for selected conversion."
+msgstr "Seçilen dönüştürme için dosya türüne izin verilmiyor."
+
+#: app.py:208
+msgid "Invalid filename."
+msgstr "Geçersiz dosya adı."
+
+#: app.py:213
+msgid "File not found."
+msgstr "Dosya bulunamadı."
+
+#: templates/index.html:5
+msgid "Conversion Type"
+msgstr "Dönüştürme Türü"
+
+#: templates/index.html:19
+msgid "Select File"
+msgstr "Dosya Seç"
+
+#: templates/index.html:23
+msgid "No file selected"
+msgstr "Dosya seçilmedi"
+
+#: templates/index.html:24
+#, python-format
+msgid "Max file size: %(size)sMB"
+msgstr "Maksimum dosya boyutu: %(size)sMB"
+
+#: templates/index.html:29
+msgid "Uploading..."
+msgstr "Yükleniyor..."
+
+#: templates/index.html:35
+msgid "Convert"
+msgstr "Dönüştür"
+
+#: templates/index.html:40
+msgid "Conversion Result"
+msgstr "Dönüştürme Sonucu"
+
+#: templates/index.html:44
+msgid "Download Converted File"
+msgstr "Dönüştürülen Dosyayı İndir"
+
+#: templates/layout.html:6 templates/layout.html:79
+msgid "File Converter"
+msgstr "Dosya Dönüştürücü"
+
+#: templates/layout.html:81
+msgid "Language"
+msgstr "Dil"
+
+#: templates/layout.html:88
+msgid "Toggle Theme"
+msgstr "Temayı Değiştir"
+
+#: templates/layout.html:99
+msgid "Error"
+msgstr "Hata"
+
+#: templates/layout.html:102
+msgid "OK"
+msgstr "Tamam"
+
+msgid "Converty - File Converter"
+msgstr "Converty - Dosya Dönüştürücü"
+
+#: app.py:LINE_NUMBER_OF_SHORT_NAME_IN_MANIFEST_ROUTE
+msgid "Converty"
+msgstr "Converty"
+
+#: app.py:LINE_NUMBER_OF_DESCRIPTION_IN_MANIFEST_ROUTE
+msgid "Easily convert your files with Converty."
+msgstr "Converty ile dosyalarınızı kolayca dönüştürün."
+
+msgid "Start a New Conversion"
+msgstr "Dönüştür"
+
+msgid "converter_pdf_to_pptx"
+msgstr "PDF'den PowerPoint'e Dönüştür"
